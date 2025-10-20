@@ -369,6 +369,26 @@ class App(QMainWindow):
         if not n.replace("-","").replace("_","").isalnum():
             QMessageBox.warning(self, "Invalid", "Letters, numbers, - _ only")
             return
+        
+        # Ensure Claude not running to avoid locked files during backup
+        if is_claude_running():
+            reply = QMessageBox.question(
+                self,
+                "Claude is Running",
+                "Claude is currently running. Close Claude now and continue backup?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+            if reply != QMessageBox.StandardButton.Yes:
+                self.log("✗ Backup cancelled (Claude running)")
+                return
+            self.log("Closing Claude...")
+            count = terminate_claude()
+            if count > 0:
+                self.log(f"✓ Claude terminated ({count})")
+                time.sleep(0.5)
+            else:
+                self.log("⚠ No Claude process found")
+        
         self.log(f"Creating '{n}'...")
         self.worker = Worker(create_backup, n)
         self.worker.finished.connect(self.on_create_ok)
