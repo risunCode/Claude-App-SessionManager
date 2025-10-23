@@ -1,3 +1,6 @@
+## This project is now merged into SurfManager
+https://github.com/risunCode/SurfManager
+
 # Claude Backup Restore Manager, Switch and manage your account easily
 <img width="1799" height="992" alt="{85969241-112B-4C50-A056-4E108DC58DCF}" src="https://github.com/user-attachments/assets/67f2efba-63d0-48ac-be02-3feb18720d2d" />
 
@@ -98,4 +101,5 @@ A config.json is created next to the EXE (or repo root in dev). Example:
 
 
 MIT (or project’s chosen license).
+
 
